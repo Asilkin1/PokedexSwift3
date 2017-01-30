@@ -39,6 +39,7 @@
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Weh-bw-RYj">
                                 <rect key="frame" x="36" y="134" width="303" height="513"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lqH-wZ-ELi">
                                     <size key="itemSize" width="105" height="105"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -46,7 +47,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="center" id="d4a-t1-A77">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="center" reuseIdentifier="PokeCell" id="d4a-t1-A77" customClass="PokeCell" customModule="Pokedex" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -59,8 +60,8 @@
                                                         <constraint firstAttribute="height" constant="80" id="l0E-Pr-RL8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eit-8I-OKz">
-                                                    <rect key="frame" x="0.0" y="84" width="105" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eit-8I-OKz">
+                                                    <rect key="frame" x="0.0" y="80" width="105" height="25"/>
                                                     <color key="backgroundColor" red="0.8955078125" green="0.22040473090000001" blue="0.56111653650000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,6 +79,10 @@
                                             <constraint firstItem="CcO-t0-smT" firstAttribute="leading" secondItem="d4a-t1-A77" secondAttribute="leading" id="cia-oX-UDw"/>
                                             <constraint firstAttribute="bottom" secondItem="eit-8I-OKz" secondAttribute="bottom" id="yQL-QC-rBb"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="eit-8I-OKz" id="e4y-Ri-HvT"/>
+                                            <outlet property="pokemonImage" destination="CcO-t0-smT" id="luV-8l-XAs"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -100,6 +105,9 @@
                             <constraint firstItem="VHq-Em-fNE" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="ziL-Hk-2An"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collection" destination="Weh-bw-RYj" id="ShD-nx-7rV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
