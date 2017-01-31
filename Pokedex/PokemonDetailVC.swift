@@ -12,12 +12,15 @@ class PokemonDetailVC: UIViewController {
 
     var pokemon: Pokemon!
     
-    @IBOutlet weak var pokemonDetails: UILabel!
+    
+    @IBOutlet weak var pokemonName: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       pokemonDetails.text = pokemon.name
+        
+        pokemonName.text = pokemon.name
+      
         
     }
 
