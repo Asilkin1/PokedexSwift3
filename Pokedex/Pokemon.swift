@@ -12,6 +12,14 @@ class Pokemon {
 
      var _name: String!
      var _pokedexId: Int!
+     var _description: String!
+     var _type: String!
+     var _defense:String!
+     var _height: String!
+     var _weight: String!
+     var _attack: String!
+     var _nextEvolution: String!
+    
     
      var name: String {
         
