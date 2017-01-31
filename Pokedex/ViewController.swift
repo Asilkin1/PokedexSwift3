@@ -7,10 +7,55 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var pokemon = [Pokemon]()
+    var musicPlayer:AVAudioPlayer!
+    
+    
+    
+    
     @IBOutlet weak var collection: UICollectionView!
+    
+    
+    @IBAction func musicButtonPressed(_ sender: UIButton) {
+        
+        if musicPlayer.isPlaying {
+            
+            musicPlayer.pause()
+            sender.alpha = 0.2
+            
+        } else {
+        
+            musicPlayer.play()
+            sender.alpha = 1.0
+        
+        }
+        
+        
+    }
+    
+    func initAudio() {
+    
+        let path = Bundle.main.path(forResource: "music", ofType: "mp3")
+        
+        do {
+            
+            musicPlayer = try AVAudioPlayer(contentsOf: URL(string: path!)!)
+            musicPlayer.prepareToPlay()
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.play()
+            
+        } catch let err as NSError {
+        
+            print(err.debugDescription)
+            
+            
+        }
+    
+    }
     
     
 
@@ -20,7 +65,39 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collection.dataSource = self
         collection.delegate = self
         
+        pokemonParser()
+        initAudio()
         
+        
+    }
+    
+    func pokemonParser() {
+        
+        let path = Bundle.main.path(forResource: "pokemon", ofType: "csv" )
+        
+        do {
+        
+            let csv = try CSV(contentsOfURL: path!)
+            let rows = csv.rows
+            print(rows)
+            
+            for row in rows {
+            
+                let pokemonId = Int(row["id"]!)!
+                let pokemonName = row["identifier"]!
+                let poke = Pokemon(name: pokemonName, pokedexId: pokemonId)
+                
+                pokemon.append(poke)
+                
+                
+            }
+        
+        } catch let err as NSError {
+        
+            print(err.debugDescription)
+        }
+        
+    
     }
     
     //Deque the cell and sets it up
@@ -28,8 +105,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell",for: indexPath) as? PokeCell {
             
-            let pokemon = Pokemon(name: "Pokemon", pokedexId: indexPath.row)
-            cell.configureCell(pokemon)
+            
+            let poke = pokemon[indexPath.row]
+            cell.configureCell(poke)
+            
             
             return cell
         
@@ -46,7 +125,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // Number of items in the section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return pokemon.count
     }
     
     // Number of sections in the view
