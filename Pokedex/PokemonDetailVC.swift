@@ -38,9 +38,22 @@ class PokemonDetailVC: UIViewController {
         
         pokemonName.text = pokemon.name
       
+        pokemon.downloadPokemonDetail {
+            
+            // Doing somehting later
+            
+            self.updateUI()
+        }
         
     }
+    
+    func updateUI() {
+    
+        
+    
+    }
 
+    
     
 
 }
